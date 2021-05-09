@@ -10,6 +10,15 @@ emptyListButton.addEventListener("click", emptyList);
 var toDoEntryBox = document.getElementById("todo-entry-box");
 var toDoList = document.getElementById("todo-list");
 
+
+var inputField = document.getElementById("todo-entry-box");
+inputField.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+        e.preventDefault(); //prevents page refresh, I don't know why and how, but it works
+        addToDoItem();
+    }
+});
+
 function newToDoItem(itemText, completed) {
     var toDoItem = document.createElement("li");
     var toDoText = document.createTextNode(itemText);

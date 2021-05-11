@@ -97,7 +97,6 @@ function saveList() {
         };
 
         toDos.push(toDoInfo);
-
     }
 
     localStorage.setItem("toDos", JSON.stringify(toDos));
@@ -113,11 +112,6 @@ function loadList() {
             newToDoItem(toDo.task, toDo.completed);
         }
     }
-
-    setTimeout(function () {
-        $('#alert-message').fadeOut('fast');
-    }, 3000); //remove alert message after 3 seconds
-
 }
 
 loadList();

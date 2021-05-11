@@ -54,7 +54,6 @@ function toggleToDoItemState() {
     }
 
     saveList();
-    toDoEntryBox.focus();
 }
 
 function clearCompletedToDoItems() {
@@ -65,7 +64,6 @@ function clearCompletedToDoItems() {
     }
 
     saveList();
-    toDoEntryBox.focus();
 }
 
 function emptyList() {
@@ -76,7 +74,6 @@ function emptyList() {
     }
 
     saveList();
-    toDoEntryBox.focus();
 }
 
 var toDoInfo = {
@@ -100,6 +97,7 @@ function saveList() {
     }
 
     localStorage.setItem("toDos", JSON.stringify(toDos));
+    toDoEntryBox.focus();
 }
 
 function loadList() {

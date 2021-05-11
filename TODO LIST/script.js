@@ -1,15 +1,14 @@
-var addButton = document.getElementById("add-button");
-addButton.addEventListener("click", addToDoItem);
-
 var clearCompletedButton = document.getElementById("clear-completed-button");
 clearCompletedButton.addEventListener("click", clearCompletedToDoItems);
+
+var clearInputButton = document.getElementById("clear-input-button");
+clearInputButton.addEventListener("click", clearInput);
 
 var emptyListButton = document.getElementById("empty-button");
 emptyListButton.addEventListener("click", emptyList);
 
 var toDoEntryBox = document.getElementById("todo-entry-box");
 var toDoList = document.getElementById("todo-list");
-
 
 var inputField = document.getElementById("todo-entry-box");
 inputField.addEventListener("keydown", function (e) {
@@ -19,22 +18,32 @@ inputField.addEventListener("keydown", function (e) {
     }
 });
 
+function clearInput() {
+    toDoEntryBox.value = "";
+    toDoEntryBox.focus();
+}
+
 function newToDoItem(itemText, completed) {
-    var toDoItem = document.createElement("li");
-    var toDoText = document.createTextNode(itemText);
-    toDoItem.appendChild(toDoText);
+    if (itemText.length != 0) {
 
-    if (completed) {
-        toDoItem.classList.add("completed");
+        var toDoItem = document.createElement("li");
+        var toDoText = document.createTextNode(itemText);
+        toDoItem.appendChild(toDoText);
+
+        if (completed) {
+            toDoItem.classList.add("completed");
+        }
+
+        toDoList.appendChild(toDoItem);
+        toDoItem.addEventListener("dblclick", toggleToDoItemState);
     }
-
-    toDoList.appendChild(toDoItem);
-    toDoItem.addEventListener("dblclick", toggleToDoItemState);
 }
 
 function addToDoItem() {
     var itemText = toDoEntryBox.value;
     newToDoItem(itemText, false);
+    toDoEntryBox.value = "";
+    saveList();
 }
 
 function toggleToDoItemState() {
@@ -43,6 +52,9 @@ function toggleToDoItemState() {
     } else {
         this.classList.add("completed");
     }
+
+    saveList();
+    toDoEntryBox.focus();
 }
 
 function clearCompletedToDoItems() {
@@ -51,6 +63,9 @@ function clearCompletedToDoItems() {
     while (completedItems.length > 0) {
         completedItems.item(0).remove();
     }
+
+    saveList();
+    toDoEntryBox.focus();
 }
 
 function emptyList() {
@@ -59,13 +74,10 @@ function emptyList() {
     while (toDoItems.length > 0) {
         toDoItems.item(0).remove();
     }
-}
 
-var myArray = [];
-myArray.push("something to store");
-myArray.push("something else to store");
-alert(myArray[0]);
-//This will alert "something to store"
+    saveList();
+    toDoEntryBox.focus();
+}
 
 var toDoInfo = {
     "task": "Thing I need to do",
@@ -73,6 +85,7 @@ var toDoInfo = {
 };
 
 function saveList() {
+
     var toDos = [];
 
     for (var i = 0; i < toDoList.children.length; i++) {
@@ -91,6 +104,7 @@ function saveList() {
 }
 
 function loadList() {
+
     if (localStorage.getItem("toDos") != null) {
         var toDos = JSON.parse(localStorage.getItem("toDos"));
 
@@ -99,6 +113,11 @@ function loadList() {
             newToDoItem(toDo.task, toDo.completed);
         }
     }
+
+    setTimeout(function () {
+        $('#alert-message').fadeOut('fast');
+    }, 3000); //remove alert message after 3 seconds
+
 }
 
 loadList();

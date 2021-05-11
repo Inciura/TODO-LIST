@@ -1,5 +1,4 @@
 body {
-    background-color: #49B749;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
@@ -25,6 +24,7 @@ body {
 
 .todo-wrapper ol {
     margin: 20px 0;
+    padding: 0;
 }
 
 .todo-wrapper ol li {
@@ -39,7 +39,7 @@ body {
 }
 
 .todo-wrapper ol li:nth-child(even) {
-    background: #ddd;
+    background: rgb(190, 240, 255);
 }
 
 .todo-wrapper .completed {
@@ -49,8 +49,7 @@ body {
 
 .todo-wrapper .pretty-button {
     margin: 10px 2px;
-    padding: 5px 20px;
-    border-radius: 15px;
+    padding: 5px 12px;
     background-color: #0093D5;
     border: none;
     color: #fff;
@@ -73,8 +72,6 @@ body {
 }
 
 #control-wrapper {
-    text-align: center;
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
@@ -89,6 +86,11 @@ body {
 
 .todo-wrapper #save-button {
     background-color: #49B749;
+}
+
+.todo-wrapper #clear-input-button{
+    background-color: #fff;
+    color: black;
 }
 
 @media only screen and (min-width: 1400px) {
